@@ -4,18 +4,12 @@ title: Setup
 permalink: /setup/
 ---
 
-You will need to install MATLAB or [GNU Octave][gnu-octave] to do this lesson.
 
-You will also need to download some data, which we will analyze using MATLAB:
+### Today we will be using Matlab 2017a. To prepare for the lecture, please open this program on your desktop.
 
-1.  Make a new folder in your Desktop called matlab-novice-inflammation.
-2.  Download [matlab-novice-inflammation-data.zip](https://github.com/swcarpentry/matlab-novice-inflammation/raw/gh-pages/data/matlab-novice-inflammation-data.zip) and move the file to this folder.
-3.	If it’s not unzipped yet, double-click on it to unzip it; this will place all the data in the `matlab-novice-inflammation` directory.
-4.	You can access this folder from the Unix shell with:
+<br>
 
-~~~
-cd Desktop/matlab-novice-inflammation/data
-~~~
-{: .bash}
+#### Windows users:
 
-[gnu-octave]: https://www.gnu.org/software/octave/
+  - use the "Start" menu to locate the Matlab folder and then execute the `Matlab_2017a` program
+  - or enter "matlab" into the search bar to locate the `Matlab_2017a` program
