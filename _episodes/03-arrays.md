@@ -1,23 +1,20 @@
 ---
-title: Working with Variables
-teaching: 20
+title: Arrays and Plots
+teaching: 15
 exercises: 0
 questions:
-- "How to I use MATLAB to perform computations?"
-- "How can I repeat these computations?"
-- "How can I perform comutations on large sets of data?"
+- "How can I easily do arithmetic on many numbers at once?"
+- "How can I generate simple plots using MATLAB?"
 objectives:
-- "Assign values to variables."
-- "Control output of MATLAB commands in the console."
-- "Learn to manage variables in memory."
+- "Create an array"
+- "Perform some simple operations on an array."
 - "Identify what kind of data is stored in MATLAB arrays."
-- "Select individual values and subsections from data."
+- "Select individual values and subsets from arrays."
 keypoints:
-- "Use ; to hide output when enterind commands."
+- "Arrays are very useful for manipulating multiple values at once."
 - "MATLAB variables are displayed in the Variables window."
 - "MATLAB stores data in arrays."
 ---
-
 
 Working with one value at a time is nice, but we can do that
 with a common calculator. One of the reasons MATLAB is so powerful
@@ -43,6 +40,7 @@ arr_plus_five = 5 + arr
 
 ~~~
 arr_plus_five=
+
     6    7    8    9    10
 ~~~
 {: .output}
@@ -54,6 +52,7 @@ arr_minus_five = arr - 5;
 
 ~~~
 arr_plus_five=
+
     -4    -3   -2    -1    0
 ~~~
 {: .output}
@@ -68,8 +67,30 @@ arr * arr
 ~~~
 {: .matlab}
 
-and hope MATLAB figures it out.
+and hope MATLAB figures it out. But if we try this we'll get an error looking like
 
+~~~
+Error using __*__
+Inner matrix dimensions must agree
+~~~
+{: .output}
+
+By changing "*" to ".*" we can get the desired output
+
+~~~
+arr .* arr
+~~~
+{: .matlab}
+
+~~~
+ans=
+
+    1    4    9    16    25
+~~~
+{: .output}
+
+Again, this is also true for the **division** (/) and **exponent** (^)
+operators.
 
 ## Gathering Information About an Array
 
@@ -127,13 +148,40 @@ ans=
 
 Arrays make it much easier to do certain things, like plot data.
 
+Let's clear out all of the variables in our session and give that a try now
 
+~~~
+clear
+~~~
+{: .matlab}
 
+Next, we'll create some x points for the plot.
 
+~~~
+x_points = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+~~~
+{: .matlab}
 
+Let's say that we want to plot a quadratic function
 
+~~~
+y_points = x_points .* x_points;
+~~~
+{: .matlab}
 
+Equivalently we could use the command 
 
+~~~
+y_points = x_points .^ 2;
+~~~
+{: .matlab}
 
+Now let's make a simple plot with these data points
 
+~~~
+plot(x,y)
+~~~
+{: .matlab}
+
+This will generate a simple plot (no legend, axes labels, title, etc.)
 
