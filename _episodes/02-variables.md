@@ -24,7 +24,7 @@ a few basic commands. Let's look into how one programs in MATLAB.
 ## Creating and accessing variables
 
 We can create a new variable simply by assigning a value to it using
-`variable_name` '=` `variable_value`:
+`variable_name` '=' `variable_value`:
 
 ~~~
 x = 10
