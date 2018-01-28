@@ -49,12 +49,17 @@ MATLAB, add a ";" at the end of the line. For example, if we create a new
 variable y with a semi-colon at the end of the command.
 
 ~~~
-y = 20;
+y=20;
 ~~~
 {: .matlab}
 
 No additional output is generated, but we can see a new variable named y in the
-workspace. We can also see what variables exist in our session using the `who` command.
+workspace. We also didn't use any spaces bewteen the variable, the equals sign
+and the value we're assigning the variable. This is okay in MATLAB - it doesn't
+care how much space is between these entries. It is however, easier to read when
+we include the spaces, so we'll try to make that a habit.
+
+We can also see what variables exist in our session using the `who` command.
 
 ~~~
 who
