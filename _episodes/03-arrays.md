@@ -24,12 +24,72 @@ These sets of numbers are referred to as **arrays** in MATLAB. An **array** can
 be created using the following syntax in the Command Window and stored as a
 variable just like other values in MATLAB.
 
+
+## Creating Arrays
+
 ~~~
 arr = [1, 2, 3, 4, 5];
 ~~~
 {: .matlab}
 
 Notice that this array also appears in the Workspace window.
+
+Any entry in an array can be 
+
+## Gathering Information About an Array
+
+The `size` command can be used to ask how large an array is
+
+~~~
+size(arr)
+~~~
+{: .matlab}
+
+~~~
+1    5
+~~~
+{: .output}
+
+This will display how many "rows" and how many "columns" are in the array. This
+particular array has one row and five columns. For now we'll only use arrays
+with one row, so we can think of them as lists of values.
+
+## Accessing entries in an array
+
+Indiviual entries in an array can be accessed by providing the array name and the **index**
+of the array entry we want to access. So to get the first entry in our array we'll use
+
+~~~
+arr(1)
+~~~
+{: .matlab}
+
+~~~
+ans=
+
+    1
+~~~
+{: .output}
+
+<br>
+Subsets of the array can also be accessed by providing a _start index_ and an
+_end index_ separated by `:` in the parenthesis. So if we wanted the first three
+values from this array we could use the command
+
+~~~
+arr(1:3)
+~~~
+{: .matlab}
+
+~~~
+ans=
+
+    1    2    3
+~~~
+{: .output}
+
+
+## Operating on Arrays
 
 Arrays can be operated on just like variables
 
@@ -92,57 +152,6 @@ ans=
 Again, this is also true for the **division** (/) and **exponent** (^)
 operators.
 
-## Gathering Information About an Array
-
-The `size` command can be used to ask how large an array is
-
-~~~
-size(arr)
-~~~
-{: .matlab}
-
-~~~
-1    5
-~~~
-{: .output}
-
-This will display how many "rows" and how many "columns" are in the array. This
-particular array has one row and five columns. For now we'll only use arrays
-with one row, so we can think of them as lists of values.
-
-## Accessing entries in an array
-
-Indiviual entries in an array can be accessed by providing the array name and the **index**
-of the array entry we want to access. So to get the first entry in our array we'll use
-
-~~~
-arr(1)
-~~~
-{: .matlab}
-
-~~~
-ans=
-
-    1
-~~~
-{: .output}
-
-<br>
-Subsets of the array can also be accessed by providing a _start index_ and an
-_end index_ separated by `:` in the parenthesis. So if we wanted the first three
-values from this array we could use the command
-
-~~~
-arr(1:3)
-~~~
-{: .matlab}
-
-~~~
-ans=
-
-    1    2    3
-~~~
-{: .output}
 
 ## Creating Plots with Arrays
 
