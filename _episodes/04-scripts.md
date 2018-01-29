@@ -29,28 +29,23 @@ displays some statistics about that data. Let's
 put those commands in a script called `analyze.m`:
 
 ~~~
-% script analyze.m
+% analyze.m
 
-patient_data = csvread('data/inflammation-01.csv');
+x_points = [1, 2, 3, 4, 5, 6]
 
-disp(['Analyzing "inflammation-01.csv": '])
-disp(['Maximum inflammation: ', num2str(max(patient_data(:)))]);
-disp(['Minimum inflammation: ', num2str(min(patient_data(:)))]);
-disp(['Standard deviation: ', num2str(std(patient_data(:)))]);
+y_points = x_points .^ 2.0;
+
+plot(x_points, y_points)
+
 ~~~
 {: .matlab}
 
 Before we can use it, we need to make sure that this file is
 visible to MATLAB. MATLAB doesn't know about all the files on your
-computer, but it keeps an eye on several directories.
-The most convenient of these directories is generally the
-"working directory", or "current directory". To find out the
-working directory, use the `pwd` (print working directory) command:
-
-~~~
-pwd
-~~~
-{: .matlab}
+computer, but it keeps an eye on several directories. One of these
+is the current directory we're working in, known as the "working 
+directory". This directory is indicatd in the **Directory Toolbar**
+just underneath the main toolbar.
 
 Once you have a script saved in a location that MATLAB knows about,
 you can get MATLAB to run those commands by typing in the name
@@ -61,31 +56,60 @@ analyze
 ~~~
 {: .matlab}
 
+When this script runs hopefully it will generate a plain plot of
+a quadratic curve.
+
+Now that we've run this plot there are a few things to take note of.
+
+  - this script automatically generated a figure for us. We can run this script again and again to generate the same plot
+
+  - the variables `x_points` and `y_points` we created in the script are still in our workspace even after the script has completed running
+
+The first thing is a positive. We now have reproducible actions we can perform in MATLAB!
+
+The second is a positive and a negative. Because these variables exist in MATLAB's working space, we can still use them as we would any other variable we created in the **Command Window**.
+
 ~~~
-Maximum inflammation: 20
-Minimum inflammation: 0
-Standard deviation: 4.6148
+plot(x,y)
 ~~~
 {: .matlab}
 
-We've also written commands to create plots:
+However, other scripts can also use them which can cause confusion - particularly if we are in the habit of using the same variable names in multiple scripts. We can show this by removing the line defining the `y_points` variable and running our script again.
 
 ~~~
-ave_inflammation = mean(patient_data, 1);
+% analyze.m
 
-plot(ave_inflammation);
-ylabel('average')
+x_points = [1, 2, 3, 4, 5, 6]
+
+plot(x_points, y_points)
+
 ~~~
 {: .matlab}
 
-MATLAB let's us save those as
-images on disk:
-
 ~~~
-% save plot to disk as png image:
-print ('average','-dpng')
+analyze
 ~~~
 {: .matlab}
+
+Our script still generates the plot even though we haven't created that variable in the script. To avoid confusion about which variables we're working with it can be useful to clear any or all variables at the beginning of our script using the clear command. Let's add the `y_points` variable back into our script and add a clear command at the beginning of the script.
+
+~~~
+% analyze.m
+
+clear;
+
+x_points = [1, 2, 3, 4, 5, 6]
+
+y_points = x_points .^ 2.0;
+
+plot(x_points, y_points)
+~~~
+{: .matlab}
+
+## Comments
+
+Comments help keep one focused on specific tasks and clarify
+our code for future readers (usually ourselves).
 
 You might have noticed that we described what we want
 our code to do using the `%`-sign.
@@ -93,95 +117,19 @@ This is another plus of writing scripts: you can comment
 your code to make it easier to understand when you come
 back to it after a while.
 
-Let's extend our `analyze` script with commands to
-create and save plots:
+## Fixing Errors
+
+Sometimes errors will appear when trying to run a script. It happens.
+
+MATLAB usually provides some information about what went wrong in the script.
+In the case of a syntax error, MATLAB will provide an error with the
+following syntax:
 
 ~~~
-% script analyze.m
-
-patient_data = csvread('inflammation-01.csv');
-
-disp(['Maximum inflammation: ', num2str(max(patient_data(:)))]);
-disp(['Minimum inflammation: ', num2str(min(patient_data(:)))]);
-disp(['Standard deviation: ', num2str(std(patient_data(:)))]);
-
-ave_inflammation = mean(patient_data, 1);
-
-subplot(1, 3, 1);
-plot(ave_inflammation);
-ylabel('average')
-
-subplot(1, 3, 2);
-plot(max(patient_data, [], 1));
-ylabel('max')
-
-subplot(1, 3, 3);
-plot(min(patient_data, [], 1));
-ylabel('min')
-
-% save plot to disk as png image:
-print ('patient_data-01','-dpng')
+Error: File: analyze.m Line: 11 Column: 10
+Unbalanced or unexpected parenthesis or bracket.
 ~~~
 {: .matlab}
 
-When saving plots to disk,
-it's a good idea to turn off their visibility as MATLAB plots them.
-Let's add a couple of lines of code to do this:
+In this case MATLAB has provided us with the name of the file in which the error occured, the line number and the column number do help us locate the source of the problem. 
 
-~~~
-% script analyze.m
-
-patient_data = csvread('inflammation-01.csv');
-
-disp(['Maximum inflammation: ', num2str(max(patient_data(:)))]);
-disp(['Minimum inflammation: ', num2str(min(patient_data(:)))]);
-disp(['Standard deviation: ', num2str(std(patient_data(:)))]);
-
-ave_inflammation = mean(patient_data, 1);
-
-figure('visible', 'off')
-
-subplot(1, 3, 1);
-plot(ave_inflammation);
-ylabel('average')
-
-subplot(1, 3, 2);
-plot(max(patient_data, [], 1));
-ylabel('max')
-
-subplot(1, 3, 3);
-plot(min(patient_data, [], 1));
-ylabel('min')
-
-% save plot to disk as png image:
-print ('patient_data-01','-dpng')
-
-close()
-~~~
-{: .matlab}
-
-If we call the `figure` function without any options,
-MATLAB will open up an empty figure window.
-Try this on the command line:
-
-~~~
-figure()
-~~~
-{: .matlab}
-
-We can ask MATLAB to create an empty figure window without
-displaying it by setting its `'visible'` property to `'off'`, like so:
-
-~~~
-figure('visible', 'off')
-~~~
-{: .matlab}
-
-When we do this, we have to be careful to manually "close" the figure
-after we are doing plotting on it - the same as we would "close"
-an actual figure window if it were open:
-
-~~~
-close()
-~~~
-{: .matlab}
